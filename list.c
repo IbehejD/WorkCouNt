@@ -42,6 +42,7 @@ void free_training_list(training_list_t *training_list_p)
         }
 
         free(old_p->exercises_list_p->arr); //free list of exercises in training
+        free(old_p->exercises_list_p);
         free(old_p); //free training
     }
 
@@ -53,10 +54,8 @@ Function which makes training
 */
 training_t *make_training() //TODO remove training???
 {   
-    printf("%d", sizeof(training_t));
     training_t *training_p = NULL;
-    training_p = (training_t *) malloc(sizeof(training_t));
-    printf("OK2");
+    training_p = (training_t *) malloc(sizeof(training_t)); 
     if (training_p == NULL)
     {
         printf("Out of memory. Can not make training_p.\n");

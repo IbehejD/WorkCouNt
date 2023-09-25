@@ -36,7 +36,6 @@ void enter_training(training_list_t *training_list_p)
     while (answer != '0'){
         printf("\n0 - No\n");
         printf("1 - Yes\n\n");
-
         printf("Want you add exercise?: ");
         scanf(" %c", &answer);
 
@@ -65,15 +64,27 @@ void enter_training(training_list_t *training_list_p)
         }
     }
 
-    exercises_lists_t *exercises_list_p;
-    exercises_list_p = malloc(exercise_count*sizeof(exercise_t));
+    exercises_lists_t *exercises_list_p = malloc(sizeof(exercises_lists_t)); 
+    if (exercises_list_p == NULL)
+    {
+        printf("Out of memory. Can not make exercises_list_p .\n");
+        exit(1);
+    }
+    exercises_list_p->arr = malloc(exercise_count*sizeof(exercise_t)); 
+    if (exercises_list_p->arr == NULL)
+    {
+        printf("Out of memory. Can not make exercises_list_p->arr .\n");
+        exit(1);
+    }
+
     exercises_list_p->count = exercise_count;
 
     for(int i = 0; i < exercise_count; i++){
-        exercises_list_p->arr[i] = ex_buffer[i];
+        exercises_list_p->arr[i].name_p = ex_buffer[i].name_p;
+        exercises_list_p->arr[i].repetitions = ex_buffer[i].repetitions;
+        exercises_list_p->arr[i].series = ex_buffer[i].series;
     }
     
-
     training_p->exercises_list_p = exercises_list_p;
     printf("Training was saved!\n");
 }
@@ -103,8 +114,11 @@ int main(void) {
                 print_training_list(training_list_p);                
                 wait();
                 break;
+            case '3':
+                printf("\nGoodbye");
+                break;
             default:
-                printf("error");
+                printf("\nerror");
         }
     }
     // free memory
