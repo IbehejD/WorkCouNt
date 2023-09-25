@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "list.h"
 
 #define NDEBUG
@@ -36,6 +35,10 @@ void free_training_list(training_list_t *training_list_p)
     {   
         old_p = curr_p;
         curr_p = curr_p->next_p;
+
+        for (int i = 0; i < old_p->exercises_list_p->count; i++){
+            free(old_p->exercises_list_p->arr[i].name_p);
+        }
 
         free(old_p->exercises_list_p->arr); //free list of exercises in training
         free(old_p); //free training
@@ -77,6 +80,13 @@ void *add_training(training_list_t *training_list_p, training_t *training_p){
     }
 
     training_p->next_p = NULL;
+}
+
+char* make_string(char *source_p)
+{
+    char* target_p = (char *) malloc(sizeof(char) * (strlen(source_p) + 1));
+    strcpy(target_p, source_p);
+    return target_p;
 }
 
 /**

@@ -45,4 +45,6 @@ void *add_training(training_list_t *training_list_p, training_t *training_p);
 
 void print_training_list(training_list_t *training_list_p);
 
+char* make_string(char *source_p);
+
 #endif  /* LIST_H */
