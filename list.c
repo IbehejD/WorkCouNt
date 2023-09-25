@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "list.h"
 
 #define NDEBUG
@@ -51,20 +52,24 @@ void free_training_list(training_list_t *training_list_p)
 Function which makes training 
 */
 training_t *make_training() //TODO remove training???
-{
-    training_t *training_p = (training_t *) malloc(sizeof(training_t));
+{   
+    printf("%d", sizeof(training_t));
+    training_t *training_p = NULL;
+    training_p = (training_t *) malloc(sizeof(training_t));
+    printf("OK2");
     if (training_p == NULL)
     {
         printf("Out of memory. Can not make training_p.\n");
         exit(1);
     }
+
     return training_p;
 }
 
 /**
 Function which adds training to training list
 */
-void *add_training(training_list_t *training_list_p, training_t *training_p){
+void add_training(training_list_t *training_list_p, training_t *training_p){
     // Training list is not empty
     if (training_list_p->tail_p != NULL)
     {
@@ -94,19 +99,23 @@ Function which print training list
 */
 void print_training_list(training_list_t *training_list_p)
 {
+
     training_t *curr_p = training_list_p->head_p;
+
 
     while (curr_p != NULL)
     {
+
         // training date print
-        printf("%d.%d.%d:\n\n", curr_p->date.day, curr_p->date.month, curr_p->date.year);
+        printf("%d.%d.%d:\n\n", curr_p->date.day, curr_p->date.month, curr_p->date.year); 
+
 
         // printing exercises
-        for(int i = 0; i<curr_p->exercises_list_p->count; i++){ 
+        for(int i = 0; i < curr_p->exercises_list_p->count; i++){ 
             char *name = curr_p->exercises_list_p->arr[i].name_p;
             int series = curr_p->exercises_list_p->arr[i].series; 
             int rep = curr_p->exercises_list_p->arr[i].repetitions;
-            printf("%s s:%d r:%d\n", name, series, rep);
+            printf("\n%s s:%d r:%d\n", name, series, rep);
         }
 
         printf("--------------------------\n");

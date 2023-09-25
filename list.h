@@ -14,9 +14,9 @@ typedef struct exercises_list{
 } exercises_lists_t;
 
 // Date
-typedef struct date{
-    unsigned int day : 5;
-    unsigned int month: 3; 
+typedef struct date{ //TODO opt
+    unsigned int day;
+    unsigned int month; 
     unsigned int year; 
 } date_t;
 
@@ -41,7 +41,7 @@ void free_training_list(training_list_t *training_list_p);
 
 training_t *make_training(); //TODO remove training???
 
-void *add_training(training_list_t *training_list_p, training_t *training_p);
+void add_training(training_list_t *training_list_p, training_t *training_p);
 
 void print_training_list(training_list_t *training_list_p);
 
